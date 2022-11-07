@@ -5,4 +5,13 @@ public class AmazonaDbContext : DbContext
     { }
 
     public DbSet<ProductEntity> Products { get; set; }
+    public DbSet<ProductTypeEntity> ProductTypes { get; set; }
+    public DbSet<ProductBrandEntity> ProductBrands { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
 }

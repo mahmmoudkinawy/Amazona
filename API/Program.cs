@@ -7,6 +7,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 builder.Services.AddDbContext<AmazonaDbContext>(
     _ => _.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -25,4 +27,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using var scope = app.Services.CreateScope();
+try
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AmazonaDbContext>();
+    await dbContext.Database.MigrateAsync();
+    await Seed.SeedData(dbContext);
+}
+catch (Exception ex)
+{
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occured while applying migrations");
+}
 app.Run();

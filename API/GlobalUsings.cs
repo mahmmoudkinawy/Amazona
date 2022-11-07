@@ -1,6 +1,13 @@
-﻿global using Microsoft.EntityFrameworkCore;
+﻿global using API.DbContexts;
 global using API.Entities;
+global using API.Interfaces;
+global using API.Repositories;
+global using Bogus;
 global using Microsoft.AspNetCore.Mvc;
-global using API.DbContexts;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using System.Reflection;
+
+
 
 

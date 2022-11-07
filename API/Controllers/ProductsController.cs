@@ -4,17 +4,17 @@
 [ApiController]
 public class ProductsController : ControllerBase
 {
-    private readonly AmazonaDbContext _context;
+    private readonly IProductRepository _productRepository;
 
-    public ProductsController(AmazonaDbContext context)
+    public ProductsController(IProductRepository productRepository)
     {
-        _context = context;
+        _productRepository = productRepository;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetProducts(CancellationToken cancellationToken)
     {
-        return Ok(await _context.Products.ToListAsync(cancellationToken));
+        return Ok(await _productRepository.GetProductsAsync(cancellationToken));
     }
 
     [HttpGet("{id}")]
@@ -22,9 +22,7 @@ public class ProductsController : ControllerBase
         [FromRoute] int id,
         CancellationToken cancellationToken)
     {
-        var product = await _context.Products.FindAsync(
-            new object?[] { id },
-            cancellationToken: cancellationToken);
+        var product = await _productRepository.GetProductByIdAsync(id, cancellationToken);
 
         if (product is null)
         {
@@ -32,5 +30,17 @@ public class ProductsController : ControllerBase
         }
 
         return Ok(product);
+    }
+
+    [HttpGet("brands")]
+    public async Task<IActionResult> GetProductBrands(CancellationToken cancellationToken)
+    {
+        return Ok(await _productRepository.GetProductBrandsAsync(cancellationToken));
+    }
+
+    [HttpGet("types")]
+    public async Task<IActionResult> GetProductTypes(CancellationToken cancellationToken)
+    {
+        return Ok(await _productRepository.GetProductTypesAsync(cancellationToken));
     }
 }
