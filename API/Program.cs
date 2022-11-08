@@ -9,6 +9,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 builder.Services.AddDbContext<AmazonaDbContext>(
     _ => _.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 

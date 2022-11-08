@@ -7,15 +7,18 @@ public class ProductsController : ControllerBase
     private readonly IRepository<ProductEntity> _productsRepository;
     private readonly IRepository<ProductBrandEntity> _productBrandsRepository;
     private readonly IRepository<ProductTypeEntity> _productTypesRepository;
+    private readonly IMapper _mapper;
 
     public ProductsController(
         IRepository<ProductEntity> productsRepository,
         IRepository<ProductBrandEntity> productBrandsRepository,
-        IRepository<ProductTypeEntity> productTypesRepository)
+        IRepository<ProductTypeEntity> productTypesRepository,
+        IMapper mapper)
     {
         _productsRepository = productsRepository;
         _productBrandsRepository = productBrandsRepository;
         _productTypesRepository = productTypesRepository;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -24,7 +27,7 @@ public class ProductsController : ControllerBase
         var spec = new ProductsWithTypesAndBrandsSpecification();
         var products = await _productsRepository.GetEntitiesWithSpecAsync(spec, cancellationToken);
 
-        return Ok(products);
+        return Ok(_mapper.Map<IReadOnlyList<ProductToReturnDto>>(products));
     }
 
     [HttpGet("{id}")]
@@ -40,7 +43,7 @@ public class ProductsController : ControllerBase
             return NotFound();
         }
 
-        return Ok(product);
+        return Ok(_mapper.Map<ProductToReturnDto>(product));
     }
 
     [HttpGet("brands")]

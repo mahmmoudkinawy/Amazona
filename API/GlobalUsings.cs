@@ -1,8 +1,10 @@
 ﻿global using API.DbContexts;
+global using API.DTOs;
 global using API.Entities;
 global using API.Interfaces;
 global using API.Repositories;
 global using API.Specifications;
+global using AutoMapper;
 global using Bogus;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
