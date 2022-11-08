@@ -4,17 +4,27 @@
 [ApiController]
 public class ProductsController : ControllerBase
 {
-    private readonly IProductRepository _productRepository;
+    private readonly IRepository<ProductEntity> _productsRepository;
+    private readonly IRepository<ProductBrandEntity> _productBrandsRepository;
+    private readonly IRepository<ProductTypeEntity> _productTypesRepository;
 
-    public ProductsController(IProductRepository productRepository)
+    public ProductsController(
+        IRepository<ProductEntity> productsRepository,
+        IRepository<ProductBrandEntity> productBrandsRepository,
+        IRepository<ProductTypeEntity> productTypesRepository)
     {
-        _productRepository = productRepository;
+        _productsRepository = productsRepository;
+        _productBrandsRepository = productBrandsRepository;
+        _productTypesRepository = productTypesRepository;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetProducts(CancellationToken cancellationToken)
     {
-        return Ok(await _productRepository.GetProductsAsync(cancellationToken));
+        var spec = new ProductsWithTypesAndBrandsSpecification();
+        var products = await _productsRepository.GetEntitiesWithSpecAsync(spec, cancellationToken);
+
+        return Ok(products);
     }
 
     [HttpGet("{id}")]
@@ -22,7 +32,8 @@ public class ProductsController : ControllerBase
         [FromRoute] int id,
         CancellationToken cancellationToken)
     {
-        var product = await _productRepository.GetProductByIdAsync(id, cancellationToken);
+        var spec = new ProductsWithTypesAndBrandsSpecification(id);
+        var product = await _productsRepository.GetEntityWithSpecAsync(spec, cancellationToken);
 
         if (product is null)
         {
@@ -35,12 +46,12 @@ public class ProductsController : ControllerBase
     [HttpGet("brands")]
     public async Task<IActionResult> GetProductBrands(CancellationToken cancellationToken)
     {
-        return Ok(await _productRepository.GetProductBrandsAsync(cancellationToken));
+        return Ok(await _productBrandsRepository.GetAllAsync(cancellationToken));
     }
 
     [HttpGet("types")]
     public async Task<IActionResult> GetProductTypes(CancellationToken cancellationToken)
     {
-        return Ok(await _productRepository.GetProductTypesAsync(cancellationToken));
+        return Ok(await _productTypesRepository.GetAllAsync(cancellationToken));
     }
 }
