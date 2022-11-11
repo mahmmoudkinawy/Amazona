@@ -1,4 +1,6 @@
-﻿namespace API.Controllers;
+﻿using API.Helpers;
+
+namespace API.Controllers;
 
 [Route("api/products")]
 [ApiController]
@@ -22,10 +24,12 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetProducts(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetProducts(
+        [FromQuery] ProductSpecParams productParams, CancellationToken cancellationToken)
     {
-        var spec = new ProductsWithTypesAndBrandsSpecification();
-        var products = await _productsRepository.GetEntitiesWithSpecAsync(spec, cancellationToken);
+        var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+        var products = await _productsRepository
+            .GetEntitiesWithSpecAsync(spec, cancellationToken);
 
         return Ok(_mapper.Map<IReadOnlyList<ProductToReturnDto>>(products));
     }
