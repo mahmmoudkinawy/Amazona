@@ -5,6 +5,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplicationServices(builder.Configuration);
 
+builder.Services.AddConfigureCors();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
@@ -12,6 +14,8 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseSwaggerDocumentation();
 
 app.UseHttpsRedirection();
+
+app.UseCors(Constants.CorsPolicyName);
 
 app.UseAuthorization();
 
