@@ -31,6 +31,12 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         return await ApplySpecification(specification).FirstOrDefaultAsync(cancellationToken);
     }
 
+    public async Task<int> GetCountWithSpecAsync(ISpecification<T> specification, 
+        CancellationToken cancellationToken)
+    {
+        return await ApplySpecification(specification).CountAsync(cancellationToken);
+    }
+
     private IQueryable<T> ApplySpecification(ISpecification<T> specification)
     {
         return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);

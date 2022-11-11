@@ -4,7 +4,7 @@ public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product
     public ProductsWithTypesAndBrandsSpecification(ProductSpecParams productParams)
         : base
             (
-                _ => 
+                _ =>
                     (string.IsNullOrEmpty(productParams.Search) || _.Name.ToLower().Contains(productParams.Search)) &&
                     (!productParams.BrandId.HasValue || _.ProductBrandId == productParams.BrandId) &&
                     (!productParams.TypeId.HasValue || _.ProductTypeId == productParams.TypeId)
@@ -13,6 +13,8 @@ public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product
         AddInclude(_ => _.ProductType);
         AddInclude(_ => _.ProductBrand);
         AddOrderBy(_ => _.Name);
+        ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
+
 
         if (!string.IsNullOrEmpty(productParams.Sort))
         {

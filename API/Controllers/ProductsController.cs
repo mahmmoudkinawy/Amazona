@@ -1,4 +1,5 @@
 ﻿using API.Helpers;
+using System.Text.Json.Serialization;
 
 namespace API.Controllers;
 
@@ -25,13 +26,29 @@ public class ProductsController : ControllerBase
 
     [HttpGet]
     public async Task<IActionResult> GetProducts(
-        [FromQuery] ProductSpecParams productParams, CancellationToken cancellationToken)
+        [FromQuery] ProductSpecParams productParams, 
+        CancellationToken cancellationToken)
     {
         var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+
         var products = await _productsRepository
             .GetEntitiesWithSpecAsync(spec, cancellationToken);
 
-        return Ok(_mapper.Map<IReadOnlyList<ProductToReturnDto>>(products));
+        var countSpec = new ProductsWithFilterForCountSpecification(productParams);
+
+        var totalItems = await _productsRepository
+            .GetCountWithSpecAsync(countSpec, cancellationToken);
+
+        var productsToReturn = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
+
+        return Ok
+            (
+                new Pagination<ProductToReturnDto>(
+                    productParams.PageSize,
+                    productParams.PageIndex,
+                    totalItems,
+                    productsToReturn)
+            );
     }
 
     [HttpGet("{id}")]
@@ -40,6 +57,7 @@ public class ProductsController : ControllerBase
         CancellationToken cancellationToken)
     {
         var spec = new ProductsWithTypesAndBrandsSpecification(id);
+
         var product = await _productsRepository.GetEntityWithSpecAsync(spec, cancellationToken);
 
         if (product is null)
