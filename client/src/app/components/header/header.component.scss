@@ -1,0 +1,41 @@
+.header {
+  justify-content: space-between;
+
+  img {
+    padding-right: 0.8rem;
+    max-height: 50px;
+    max-width: 35px;
+    vertical-align: middle;
+  }
+
+  //   .header-item-selected {
+  //     background: lighten($color: $item-selected, $amount: 10%);
+  //   }
+
+  button {
+    padding-right: 1rem;
+    font-size: 16px;
+  }
+
+  &-form-margin {
+    padding-right: 1rem;
+  }
+
+  &-right {
+    display: flex;
+    justify-content: right;
+    font-size: 18px;
+
+    .mat-raised-button {
+      font-size: 10px;
+      width: 52px;
+      min-width: 50px;
+      padding: 4px 12px;
+    }
+
+    div {
+      font-size: 14px;
+      padding: 7.5px;
+    }
+  }
+}

@@ -13,7 +13,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseSwaggerDocumentation();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors(Constants.CorsPolicyName);
 
