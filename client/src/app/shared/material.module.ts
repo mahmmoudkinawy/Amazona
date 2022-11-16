@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 const MaterialComponents = [
   MatCardModule,
