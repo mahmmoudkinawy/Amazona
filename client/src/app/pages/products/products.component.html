@@ -1,0 +1,51 @@
+<section>
+    <div class="filters-grid">
+
+        <div>
+            <mat-form-field>
+                <mat-label>Search</mat-label>
+                <input matInput placeholder="Ex. Meow">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary">Search</button>
+            <button mat-raised-button>Reset</button>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Sort</mat-label>
+            <mat-select disableRipple>
+                <mat-option value="1">Alphabetical</mat-option>
+                <mat-option value="2">Price: Low to High</mat-option>
+                <mat-option value="3">Price: High to Low</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-list role="list">
+            <h3>Brands</h3>
+            <mat-list-item role="listitem" *ngFor="let brand of brands">
+                {{brand.name}}
+            </mat-list-item>
+        </mat-list>
+
+        <mat-list role="list">
+            <h3>Types</h3>
+            <mat-list-item role="listitem" *ngFor="let type of types">
+                {{type.name}}
+            </mat-list-item>
+        </mat-list>
+
+    </div>
+
+    <div class="products-grid">
+        <header>
+            <span>Showing <strong>{{products.length}}</strong> of <strong>16</strong> Results</span>
+        </header>
+        <div class="row">
+            <div class="column" *ngFor="let product of products">
+                <app-product-item [product]="product"></app-product-item>
+            </div>
+        </div>
+    </div>
+</section>

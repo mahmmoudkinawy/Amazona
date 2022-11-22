@@ -8,10 +8,18 @@ import { AppComponent } from './app.component';
 
 import { MaterialModule } from './shared/material.module';
 
+import { ProductItemComponent } from './components/product-item/product-item.component';
 import { HeaderComponent } from './components/header/header.component';
 
+import { ProductsComponent } from './pages/products/products.component';
+
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    ProductItemComponent,
+    ProductsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

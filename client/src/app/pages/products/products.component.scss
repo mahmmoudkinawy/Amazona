@@ -1,0 +1,39 @@
+section {
+  display: flex;
+
+  .row {
+    margin-right: 150px;
+    margin: 0 -5px;
+
+    .column {
+      float: left;
+      width: 25%;
+      padding: 0 10px;
+    }
+
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+
+  mat-list-item {
+    cursor: pointer;
+  }
+
+  .filters-grid {
+    width: 20%;
+    padding: 2em;
+    min-height: 500px;
+  }
+
+  .products-grid {
+    padding: 30px;
+    width: 80%;
+  }
+
+  button {
+    margin: 5px;
+  }
+}
