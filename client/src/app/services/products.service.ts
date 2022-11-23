@@ -24,6 +24,10 @@ export class ProductsService {
       params = params.append('typeId', productParams.typeId.toString());
     }
 
+    if (productParams.search.length > 0) {
+      params = params.append('search', productParams.search);
+    }
+
     params = params.append('sort', productParams.sort);
     params = params.append('pageIndex', productParams.pageIndex.toString());
     params = params.append('pageSize', productParams.pageSize.toString());

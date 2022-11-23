@@ -1,13 +1,26 @@
 <section>
   <div class="filters-grid">
     <div>
-      <mat-form-field>
-        <mat-label>Search</mat-label>
-        <input matInput placeholder="Ex. Meow" />
-      </mat-form-field>
+      <form (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <mat-label>Search</mat-label>
+          <input
+            matInput
+            placeholder="Ex. Meow"
+            pattern="^\S+$"
+            [(ngModel)]="productParams.search"
+            name="search"
+            #searchInput="ngModel"
+          />
 
-      <button mat-raised-button color="primary">Search</button>
-      <button mat-raised-button>Reset</button>
+          <mat-error *ngIf="searchInput.hasError('pattern')">
+            White space is not allowed.
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary">Search</button>
+        <button mat-raised-button type="reset">Reset</button>
+      </form>
     </div>
 
     <mat-divider></mat-divider>
@@ -60,6 +73,7 @@
     </div>
 
     <app-pager
+      *ngIf="totalCount > 0 && productParams.totalCount > 0"
       [pageSize]="productParams.pageSize"
       [pageIndex]="productParams.pageIndex"
       [totalCount]="productParams.totalCount"

@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     pageIndex: 1,
     pageSize: 6,
     sort: 'name',
+    search: '',
   };
   sortOptions = [
     { name: 'Alphabetical', value: 'name' },
@@ -90,6 +91,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onPageChanged(event: any) {
     this.productParams.pageIndex = event.pageIndex;
+    this.loadProducts();
+  }
+
+  onSubmit() {
     this.loadProducts();
   }
 

@@ -1,7 +1,13 @@
-.card {
+mat-card {
   max-width: 400px;
-}
 
-.header-image {
-  background-size: cover;
+  .price {
+    padding: 15px;
+    text-align: left;
+    font-size: 25px;
+  }
+
+  .header-image {
+    background-size: cover;
+  }
 }

@@ -1,4 +1,4 @@
-<mat-card class="card" *ngIf="product">
+<mat-card *ngIf="product">
     <mat-card-header>
         <img mat-card-avatar class="header-image" [src]="product.pictureUrl" [alt]="product.name">
         <mat-card-title>{{product.name}}</mat-card-title>
@@ -6,7 +6,7 @@
     </mat-card-header>
     <img mat-card-image [src]="product.pictureUrl" [alt]="product.name">
     <mat-card-content>
-        {{product.price | currency}}
+        <h4 class="price">{{product.price | currency}}</h4>
     </mat-card-content>
     <mat-card-actions>
         <button mat-button>
