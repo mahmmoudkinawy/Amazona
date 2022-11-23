@@ -1,5 +1,5 @@
 ﻿namespace API.Middleware;
-public class ExceptionMiddleware
+public sealed class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly IWebHostEnvironment _env;

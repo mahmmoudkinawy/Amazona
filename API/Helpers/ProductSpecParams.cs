@@ -1,5 +1,5 @@
 ﻿namespace API.Helpers;
-public class ProductSpecParams
+public sealed class ProductSpecParams
 {
     public int? BrandId { get; set; }
     public int? TypeId { get; set; }

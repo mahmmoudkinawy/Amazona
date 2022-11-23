@@ -1,5 +1,5 @@
 ﻿namespace API.Specifications;
-public class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
+public sealed class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
 {
     public static IQueryable<TEntity> GetQuery(
         IQueryable<TEntity> inputQuery,

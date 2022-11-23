@@ -1,5 +1,5 @@
 ﻿namespace API.Repositories;
-public class Repository<T> : IRepository<T> where T : BaseEntity
+public sealed class Repository<T> : IRepository<T> where T : BaseEntity
 {
     private readonly AmazonaDbContext _context;
 

@@ -1,5 +1,5 @@
 ﻿namespace API.DbContexts;
-public class AmazonaDbContext : DbContext
+public sealed class AmazonaDbContext : DbContext
 {
     public AmazonaDbContext(DbContextOptions<AmazonaDbContext> options) : base(options)
     { }

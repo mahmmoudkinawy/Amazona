@@ -2,7 +2,7 @@
 
 [ApiController]
 [Route("api/errors")]
-public class ErrorsController : ControllerBase
+public sealed class ErrorsController : ControllerBase
 {
     private readonly AmazonaDbContext _context;
 

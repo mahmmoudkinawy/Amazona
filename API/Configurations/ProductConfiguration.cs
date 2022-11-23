@@ -1,5 +1,5 @@
 ﻿namespace API.Configurations;
-public class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
+public sealed class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
 {
     public void Configure(EntityTypeBuilder<ProductEntity> builder)
     {

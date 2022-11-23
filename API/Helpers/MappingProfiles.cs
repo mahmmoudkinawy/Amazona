@@ -1,5 +1,5 @@
 ﻿namespace API.Helpers;
-public class MappingProfiles : Profile
+public sealed class MappingProfiles : Profile
 {
 	public MappingProfiles()
 	{

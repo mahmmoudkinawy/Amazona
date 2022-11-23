@@ -1,11 +1,8 @@
-﻿using API.Helpers;
-using System.Text.Json.Serialization;
-
-namespace API.Controllers;
+﻿namespace API.Controllers;
 
 [Route("api/products")]
 [ApiController]
-public class ProductsController : ControllerBase
+public sealed class ProductsController : ControllerBase
 {
     private readonly IRepository<ProductEntity> _productsRepository;
     private readonly IRepository<ProductBrandEntity> _productBrandsRepository;

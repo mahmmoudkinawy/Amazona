@@ -1,5 +1,5 @@
 ﻿namespace API.Helpers;
-public class Pagination<T> where T : class
+public sealed class Pagination<T> where T : class
 {
     public int PageSize { get; set; }
     public int PageIndex { get; set; }
