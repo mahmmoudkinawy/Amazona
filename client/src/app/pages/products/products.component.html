@@ -15,23 +15,25 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Sort</mat-label>
-            <mat-select disableRipple>
-                <mat-option value="1">Alphabetical</mat-option>
-                <mat-option value="2">Price: Low to High</mat-option>
-                <mat-option value="3">Price: High to Low</mat-option>
+            <mat-select (selectionChange)="onSortSelected($event.value)">
+                <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
+                    {{sort.name }}
+                </mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-list role="list">
             <h3>Brands</h3>
-            <mat-list-item role="listitem" *ngFor="let brand of brands">
+            <mat-list-item role="listitem" *ngFor="let brand of brands"
+                [class.is-active]="brand.id === productParams.brandId" (click)="onProductBrandSelected(brand.id)">
                 {{brand.name}}
             </mat-list-item>
         </mat-list>
 
         <mat-list role="list">
             <h3>Types</h3>
-            <mat-list-item role="listitem" *ngFor="let type of types">
+            <mat-list-item role="listitem" *ngFor="let type of types"
+                [class.is-active]="type.id === productParams.typeId" (click)="onProductTypeSelected(type.id)">
                 {{type.name}}
             </mat-list-item>
         </mat-list>
@@ -41,6 +43,7 @@
     <div class="products-grid">
         <header>
             <span>Showing <strong>{{products.length}}</strong> of <strong>16</strong> Results</span>
+            <span *ngIf="products.length === 0">Sorry, there is no products.</span>
         </header>
         <div class="row">
             <div class="column" *ngFor="let product of products">
