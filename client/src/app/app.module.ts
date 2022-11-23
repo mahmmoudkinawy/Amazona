@@ -10,8 +10,10 @@ import { MaterialModule } from './shared/material.module';
 
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { HeaderComponent } from './components/header/header.component';
+import { PagingHeaderContentComponent } from './components/paging-header-content/paging-header-content.component';
 
 import { ProductsComponent } from './pages/products/products.component';
+import { PagerComponent } from './components/pager/pager.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ProductsComponent } from './pages/products/products.component';
     HeaderComponent,
     ProductItemComponent,
     ProductsComponent,
+    PagingHeaderContentComponent,
+    PagerComponent,
   ],
   imports: [
     BrowserModule,

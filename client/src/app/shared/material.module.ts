@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const MaterialComponents = [
   MatCardModule,
@@ -20,6 +21,7 @@ const MaterialComponents = [
   MatSelectModule,
   MatInputModule,
   MatRadioModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({

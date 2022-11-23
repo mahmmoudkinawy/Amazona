@@ -14,14 +14,18 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   private readonly dispose$ = new Subject();
-  productParams: ProductParams = {
-    brandId: 0,
-    typeId: 0,
-    sort: 'name',
-  };
   products: Product[] = [];
   brands: ProductBrand[] = [];
   types: ProductType[] = [];
+  totalCount = 0;
+  productParams: ProductParams = {
+    brandId: 0,
+    typeId: 0,
+    totalCount: 0,
+    pageIndex: 1,
+    pageSize: 6,
+    sort: 'name',
+  };
   sortOptions = [
     { name: 'Alphabetical', value: 'name' },
     { name: 'Price: Low to High', value: 'priceAsc' },
@@ -40,12 +44,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productsService
       .loadProducts(this.productParams)
       .pipe(takeUntil(this.dispose$))
-      .subscribe(
-        (products) => (this.products = products),
-        (error) => {
-          console.log('Error:', error);
-        }
-      );
+      .subscribe((response) => {
+        this.products = response.data;
+        this.productParams.totalCount = response.totalItems;
+        this.productParams.pageIndex = response.pageIndex;
+        this.productParams.pageSize = response.pageSize;
+        this.totalCount = response.totalItems;
+      });
   }
 
   private loadProductBrands() {
@@ -80,6 +85,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onSortSelected(sort: string) {
     this.productParams.sort = sort;
+    this.loadProducts();
+  }
+
+  onPageChanged(event: any) {
+    this.productParams.pageIndex = event.pageIndex;
     this.loadProducts();
   }
 

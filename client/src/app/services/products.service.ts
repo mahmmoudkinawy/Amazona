@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Pagination } from '../models/pagination';
@@ -26,12 +25,12 @@ export class ProductsService {
     }
 
     params = params.append('sort', productParams.sort);
+    params = params.append('pageIndex', productParams.pageIndex.toString());
+    params = params.append('pageSize', productParams.pageSize.toString());
 
-    return this.http
-      .get<Pagination>(`${environment.apiUrl}/products`, {
-        params: params,
-      })
-      .pipe(map((respose) => respose.data));
+    return this.http.get<Pagination>(`${environment.apiUrl}/products`, {
+      params: params,
+    });
   }
 
   loadProductBrands() {
