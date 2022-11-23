@@ -76,11 +76,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onProductBrandSelected(brandId: number) {
     this.productParams.brandId = brandId;
+    this.productParams.pageIndex = 1;
     this.loadProducts();
   }
 
   onProductTypeSelected(typeId: number) {
     this.productParams.typeId = typeId;
+    this.productParams.pageIndex = 1;
     this.loadProducts();
   }
 
@@ -94,7 +96,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.loadProducts();
   }
 
-  onSubmit() {
+  onSearch() {
+    this.productParams.pageIndex = 1;
     this.loadProducts();
   }
 
