@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { Pagination } from '../models/pagination';
+import { Product } from '../models/product';
 import { ProductBrand } from '../models/productBrand';
 import { ProductParams } from '../models/productParams';
 import { ProductType } from '../models/productType';
@@ -35,6 +36,10 @@ export class ProductsService {
     return this.http.get<Pagination>(`${environment.apiUrl}/products`, {
       params: params,
     });
+  }
+
+  loadProduct(id: number) {
+    return this.http.get<Product>(`${environment.apiUrl}/products/${id}`);
   }
 
   loadProductBrands() {

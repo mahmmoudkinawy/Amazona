@@ -1,19 +1,29 @@
 <mat-toolbar color="primary" class="header">
+  <div>
+    <img src="../../../assets/images/logo.png" class="logo" routerLink="/" alt="Logo" />
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="header-item-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
+    <a mat-button routerLink="/shop" routerLinkActive="header-item-selected"
+      >Shop</a
+    >
+    <a mat-button routerLinkActive="header-item-selected">Offers</a>
+    <a mat-button routerLinkActive="header-item-selected">Dashboard</a>
+  </div>
 
-    <div>
-        <img src="../../../assets/images/logo.png" alt="Logo">
-        <a mat-button>Home</a>
-        <a mat-button>Shop</a>
-        <a mat-button>Offers</a>
-        <a mat-button>Dashboard</a>
-    </div>
-
-    <div>
-        <a mat-button>
-            <mat-icon matBadge="5" matBadgeColor="warn">shopping_cart</mat-icon>
-        </a>
-        <a mat-button>Login</a>
-        <a mat-button>Register</a>
-    </div>
-
+  <div>
+    <a mat-button>
+      <mat-icon matBadge="5" matBadgeColor="warn">shopping_cart</mat-icon>
+    </a>
+    <a mat-button routerLink="/login" routerLinkActive="header-item-selected"
+      >Login</a
+    >
+    <a mat-button routerLink="/register" routerLinkActive="header-item-selected"
+      >Register</a
+    >
+  </div>
 </mat-toolbar>

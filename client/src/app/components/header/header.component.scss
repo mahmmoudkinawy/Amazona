@@ -1,20 +1,23 @@
+@import "../../../styles/colors";
+
 .header {
   justify-content: space-between;
 
-  img {
+  .logo {
     padding-right: 0.8rem;
     max-height: 50px;
     max-width: 35px;
     vertical-align: middle;
+    cursor: pointer;
   }
 
   a {
     color: white;
   }
 
-  //   .header-item-selected {
-  //     background: lighten($color: $item-selected, $amount: 10%);
-  //   }
+  .header-item-selected {
+    background: lighten($color: $item-selected, $amount: 10%);
+  }
 
   button {
     padding-right: 1rem;
