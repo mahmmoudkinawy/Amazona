@@ -10,13 +10,29 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ServerErrorComponent } from './pages/server-error/server-error.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'shop', component: ProductsComponent },
-  { path: 'shop/:id', component: ProductDetailsComponent },
-  { path: 'server-error', component: ServerErrorComponent },
-  { path: 'not-found', component: NotFoundComponent },
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
+  { path: 'login', component: LoginComponent, data: { breadcrumb: 'Login' } },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: { breadcrumb: 'Register' },
+  },
+  { path: 'shop', component: ProductsComponent, data: { breadcrumb: 'Shop' } },
+  {
+    path: 'shop/:id',
+    component: ProductDetailsComponent,
+    data: { breadcrumb: { alias: 'productDetails' } },
+  },
+  {
+    path: 'server-error',
+    component: ServerErrorComponent,
+    data: { breadcrumb: 'Server Error' },
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+    data: { breadcrumb: 'Not Found' },
+  },
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
 ];
 

@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 import { MaterialModule } from './shared/material.module';
 
@@ -25,6 +26,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ServerErrorComponent } from './pages/server-error/server-error.component';
 
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
+import { SectionHeaderComponent } from './components/section-header/section-header.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { ErrorsInterceptor } from './interceptors/errors.interceptor';
     ProductDetailsComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    SectionHeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { ErrorsInterceptor } from './interceptors/errors.interceptor';
     MaterialModule,
     HttpClientModule,
     FormsModule,
+    BreadcrumbModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
