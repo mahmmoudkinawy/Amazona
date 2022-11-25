@@ -20,7 +20,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private productsServices: ProductsService,
     private activatedRoute: ActivatedRoute,
     private breadcrumbService: BreadcrumbService
-  ) {}
+  ) {
+    this.breadcrumbService.set('@productDetails', ' ');
+  }
 
   ngOnInit(): void {
     this.loadProduct();

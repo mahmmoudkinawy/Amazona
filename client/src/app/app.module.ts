@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BreadcrumbModule } from 'xng-breadcrumb';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { MaterialModule } from './shared/material.module';
 
@@ -16,6 +17,7 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { HeaderComponent } from './components/header/header.component';
 import { PagingHeaderContentComponent } from './components/paging-header-content/paging-header-content.component';
 import { PagerComponent } from './components/pager/pager.component';
+import { SectionHeaderComponent } from './components/section-header/section-header.component';
 
 import { ProductsComponent } from './pages/products/products.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -26,7 +28,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ServerErrorComponent } from './pages/server-error/server-error.component';
 
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
-import { SectionHeaderComponent } from './components/section-header/section-header.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { SectionHeaderComponent } from './components/section-header/section-head
     HttpClientModule,
     FormsModule,
     BreadcrumbModule,
+    NgxSpinnerModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
@@ -61,6 +64,11 @@ import { SectionHeaderComponent } from './components/section-header/section-head
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorsInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true,
     },
   ],

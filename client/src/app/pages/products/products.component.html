@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="brands.length > 0 && types.length > 0">
   <div class="filters-grid">
     <div>
       <form (ngSubmit)="onSearch()">
