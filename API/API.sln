@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API.csproj", "{9EE6F3A3-C285-42F0-943C-D9AA9C69A308}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amazona.Tests", "..\Amazona.Tests\Amazona.Tests.csproj", "{83086917-A589-498E-85A1-0B92936D6E0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amazona.Tests", "..\Amazona.Tests\Amazona.Tests.csproj", "{83086917-A589-498E-85A1-0B92936D6E0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
