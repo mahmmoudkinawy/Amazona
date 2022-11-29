@@ -20,6 +20,7 @@ import { PagerComponent } from './components/pager/pager.component';
 import { SectionHeaderComponent } from './components/section-header/section-header.component';
 
 import { ProductsComponent } from './pages/products/products.component';
+import { BasketComponent } from './pages/basket/basket.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -45,6 +46,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     NotFoundComponent,
     ServerErrorComponent,
     SectionHeaderComponent,
+    BasketComponent,
   ],
   imports: [
     BrowserModule,

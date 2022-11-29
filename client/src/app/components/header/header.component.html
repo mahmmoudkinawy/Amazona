@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="header">
+<mat-toolbar color="primary" class="header" >
   <div>
     <img
       src="../../../assets/images/logo.png"
@@ -20,8 +20,13 @@
   </div>
 
   <div>
-    <a mat-button>
-      <mat-icon matBadge="5" matBadgeColor="warn">shopping_cart</mat-icon>
+    <a
+      *ngIf="basket$ | async as basket"
+      mat-button
+      routerLink="/basket"
+      routerLinkActive="header-item-selected"
+    >
+      <mat-icon [matBadge]="basket.items.length" matBadgeColor="warn">shopping_cart</mat-icon>
     </a>
     <a mat-button routerLink="/login" routerLinkActive="header-item-selected"
       >Login</a
