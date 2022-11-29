@@ -1,0 +1,12 @@
+<mat-card *ngIf="(basketTotals$ | async) as totals">
+    <mat-card-content>
+        <mat-card-title>Order Summary</mat-card-title>
+        <mat-card-subtitle>Order Summary</mat-card-subtitle>
+
+        <h3>Order subtotal: <strong>{{totals.subtotal | currency}}</strong></h3>
+        <h3>Shipping and handling: <strong>{{totals.shipping | currency}}</strong></h3>
+        <h3>Total: <strong>{{totals.total | currency}}</strong></h3>
+
+        <button mat-raised-button routerLink="/checkout" color="primary">Proceed To Checkout</button>
+    </mat-card-content>
+</mat-card>

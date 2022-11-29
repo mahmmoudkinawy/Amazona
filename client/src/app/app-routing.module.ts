@@ -9,6 +9,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { BasketComponent } from './pages/basket/basket.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ServerErrorComponent } from './pages/server-error/server-error.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
@@ -28,6 +29,11 @@ const routes: Routes = [
     path: 'basket',
     component: BasketComponent,
     data: { breadcrumb: 'Basket' },
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    data: { breadcrumb: 'Checkout' },
   },
   {
     path: 'server-error',

@@ -1,34 +1,39 @@
 <section *ngIf="product">
+  <div class="left-column">
+    <img class="active" [src]="product.pictureUrl" [alt]="product.name" />
+  </div>
 
-    <div class="left-column">
-        <img class="active" [src]="product.pictureUrl" [alt]="product.name">
+  <div class="right-column">
+    <div class="product-description">
+      <span>{{ product.productBrand }} / {{ product.productType }}</span>
+      <h1>{{ product.name }}</h1>
+      <p>{{ product.description }}</p>
     </div>
 
-    <div class="right-column">
-
-        <div class="product-description">
-            <span>{{product.productBrand}} / {{product.productType}}</span>
-            <h1>{{product.name}}</h1>
-            <p>{{product.description}}</p>
-        </div>
-
+    <div>
+      <div class="cable-config">
         <div>
-            <div class="cable-config">
-                <div>
-                    <button mat-icon-button>
-                        <mat-icon>add_circle</mat-icon>
-                    </button>
-                    <span class="product-count">2</span>
-                    <button mat-icon-button>
-                        <mat-icon>remove</mat-icon>
-                    </button>
-                </div>
-            </div>
+          <button mat-icon-button (click)="incrementQuantity()">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+          <span class="product-count">{{ quantity }}</span>
+          <button mat-icon-button (click)="decrementQuantity()">
+            <mat-icon>remove</mat-icon>
+          </button>
         </div>
-
-        <div class="product-price">
-            <span>{{product.price | currency}}</span>
-            <button mat-raised-button class="cart-btn" color="primary">Add to cart</button>
-        </div>
+      </div>
     </div>
+
+    <div class="product-price">
+      <span>{{ product.price | currency }}</span>
+      <button
+        mat-raised-button
+        class="cart-btn"
+        color="primary"
+        (click)="addItemToBasket()"
+      >
+        Add to cart
+      </button>
+    </div>
+  </div>
 </section>

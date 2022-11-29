@@ -1,5 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Product } from 'src/app/models/product';
 import { BasketService } from 'src/app/services/basket.service';
@@ -9,8 +8,7 @@ import { BasketService } from 'src/app/services/basket.service';
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.scss'],
 })
-export class ProductItemComponent implements OnInit, OnDestroy {
-  private readonly dispose$ = new Subject();
+export class ProductItemComponent implements OnInit {
   @Input() product: Product | null = null;
 
   constructor(private basketService: BasketService) {}
@@ -18,11 +16,6 @@ export class ProductItemComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   addItemToBasket() {
-    this.basketService.addItemToBasket(this.product!, this.dispose$);
-  }
-
-  ngOnDestroy(): void {
-    this.dispose$.complete();
-    this.dispose$.unsubscribe();
+    this.basketService.addItemToBasket(this.product!);
   }
 }

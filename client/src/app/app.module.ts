@@ -18,7 +18,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { PagingHeaderContentComponent } from './components/paging-header-content/paging-header-content.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { SectionHeaderComponent } from './components/section-header/section-header.component';
+import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { BasketComponent } from './pages/basket/basket.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -47,6 +49,8 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     ServerErrorComponent,
     SectionHeaderComponent,
     BasketComponent,
+    CheckoutComponent,
+    OrderTotalsComponent,
   ],
   imports: [
     BrowserModule,
