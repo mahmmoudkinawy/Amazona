@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { Basket } from 'src/app/models/basket';
 
+import { Basket } from 'src/app/models/basket';
 import { BasketItem } from 'src/app/models/basketItem';
 import { BasketService } from 'src/app/services/basket.service';
 
@@ -14,13 +14,7 @@ export class BasketComponent implements OnInit {
   private readonly dispose$ = new Subject();
   basket$: Observable<Basket | null> | null = null;
   dataSource: BasketItem[] | undefined = [];
-  displayedColumns: string[] = [
-    'product',
-    'price',
-    'quantity',
-    'total',
-    'remove',
-  ];
+  displayedColumns = ['product', 'price', 'quantity', 'total', 'remove'];
 
   constructor(private basketService: BasketService) {}
 
@@ -45,6 +39,6 @@ export class BasketComponent implements OnInit {
   private loadBasketItems() {
     this.basketService.basket$
       .pipe(takeUntil(this.dispose$))
-      .subscribe((basket) => (this.dataSource = basket?.items));
+      .subscribe((basket) => (this.dataSource = basket.items));
   }
 }
