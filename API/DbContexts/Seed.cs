@@ -38,4 +38,27 @@ public static class Seed
 
         await context.SaveChangesAsync();
     }
+
+    public static async Task SeedUsers(UserManager<UserEntity> userManager)
+    {
+        if (await userManager.Users.AnyAsync()) return;
+
+        var user = new UserEntity
+        {
+            DisplayName = "Bob",
+            Email = "bob@test.com",
+            UserName = "bob@test.com",
+            Address = new AddressEntity
+            {
+                FirstName = "bob",
+                LastName = "bob",
+                City = "Shebin-Elkom",
+                State = "Menofia",
+                Street = "Salah-Eldeen",
+                ZipCode = "01203bpA"
+            }
+        };
+
+        await userManager.CreateAsync(user, "Pa$$w0rd");
+    }
 }

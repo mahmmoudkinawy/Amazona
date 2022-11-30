@@ -1,5 +1,7 @@
 ﻿namespace API.DbContexts;
-public sealed class AmazonaDbContext : DbContext
+public sealed class AmazonaDbContext : IdentityDbContext<UserEntity, IdentityRole<int>, int,
+    IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>,
+    IdentityRoleClaim<int>, IdentityUserToken<int>>
 {
     public AmazonaDbContext(DbContextOptions<AmazonaDbContext> options) : base(options)
     { }

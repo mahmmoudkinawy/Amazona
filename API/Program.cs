@@ -5,6 +5,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplicationServices(builder.Configuration);
 
+builder.Services.AddIdentityServices();
+
 builder.Services.AddConfigureCors();
 
 var app = builder.Build();
@@ -17,6 +19,8 @@ app.UseSwaggerDocumentation();
 
 app.UseCors(Constants.CorsPolicyName);
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
@@ -25,8 +29,10 @@ using var scope = app.Services.CreateScope();
 try
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AmazonaDbContext>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<UserEntity>>();
     await dbContext.Database.MigrateAsync();
     await Seed.SeedData(dbContext);
+    await Seed.SeedUsers(userManager);
 }
 catch (Exception ex)
 {
