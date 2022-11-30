@@ -11,10 +11,7 @@ public static class ApplicationServicesExtensions
 
         services.AddScoped<IBasketRepository, BasketRepository>();
 
-        services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
-        services.AddDbContext<AmazonaDbContext>(
-            _ => _.UseNpgsql(config.GetConnectionString("DefaultConnection")));
+        services.AddScoped<ITokenService, TokenService>();
 
         services.AddSingleton<IConnectionMultiplexer>(_ =>
         {
@@ -24,6 +21,12 @@ public static class ApplicationServicesExtensions
 
             return ConnectionMultiplexer.Connect(configurations);
         });
+
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+        services.AddDbContext<AmazonaDbContext>(
+            _ => _.UseNpgsql(config.GetConnectionString("DefaultConnection")));
+
 
         return services;
     }
