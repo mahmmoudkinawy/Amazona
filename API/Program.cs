@@ -1,7 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerServices();
 
 builder.Services.AddApplicationServices(builder.Configuration);
 

@@ -10,6 +10,7 @@ global using API.Services;
 global using API.Specifications;
 global using AutoMapper;
 global using Bogus;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -17,6 +18,7 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.IdentityModel.Tokens;
+global using Microsoft.OpenApi.Models;
 global using StackExchange.Redis;
 global using System.ComponentModel.DataAnnotations;
 global using System.ComponentModel.DataAnnotations.Schema;
@@ -26,7 +28,6 @@ global using System.Reflection;
 global using System.Security.Claims;
 global using System.Text;
 global using System.Text.Json;
-global using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
 
