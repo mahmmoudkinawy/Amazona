@@ -5,10 +5,14 @@
 public class BasketsController : ControllerBase
 {
     private readonly IBasketRepository _basketRepository;
+    private readonly IMapper _mapper;
 
-    public BasketsController(IBasketRepository basketRepository)
+    public BasketsController(
+        IBasketRepository basketRepository,
+        IMapper mapper)
     {
         _basketRepository = basketRepository;
+        _mapper = mapper;
     }
 
     //All params must be as route to be requierd, but just I'm trying to test someting
@@ -22,9 +26,11 @@ public class BasketsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateOrUpdateBasket([FromBody] CustomerBasketEntity basket)
+    public async Task<IActionResult> CreateOrUpdateBasket([FromBody] CustomerBasketDto basket)
     {
-        var basketToCreateOrUpdate = await _basketRepository.CreateOrUpdateBasketAsync(basket);
+        var basketToBeMapped = _mapper.Map<CustomerBasketEntity>(basket);
+
+        var basketToCreateOrUpdate = await _basketRepository.CreateOrUpdateBasketAsync(basketToBeMapped);
 
         return Ok(basketToCreateOrUpdate);
     }

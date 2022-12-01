@@ -38,7 +38,7 @@ public sealed class AccountController : ControllerBase
     [HttpGet("email-exists")]
     public async Task<IActionResult> CheckEmailExists([FromQuery] string email)
     {
-        return Ok(await _userManager.FindByEmailAsync(email) is not null);
+        return Ok(await UserExists(email));
     }
 
     [Authorize]
@@ -60,7 +60,7 @@ public sealed class AccountController : ControllerBase
 
         var result = await _userManager.UpdateAsync(user);
 
-        if(!result.Succeeded)
+        if (!result.Succeeded)
         {
             return BadRequest("Problem Updating the Address");
         }
@@ -96,6 +96,11 @@ public sealed class AccountController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
+        if (await UserExists(registerDto.Email))
+        {
+            return BadRequest("Email already exists");
+        }
+
         var user = new UserEntity
         {
             DisplayName = registerDto.DisplayName,
@@ -122,5 +127,10 @@ public sealed class AccountController : ControllerBase
             Email = user.Email,
             Token = _tokenService.CreateToken(user)
         });
+    }
+
+    private async Task<bool> UserExists(string email)
+    {
+        return await _userManager.FindByEmailAsync(email) is not null;
     }
 }
