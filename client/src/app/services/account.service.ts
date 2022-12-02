@@ -20,8 +20,7 @@ export class AccountService {
       .post<User>(`${environment.apiUrl}/account/login`, userForLogin)
       .pipe(
         map((user) => {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUser$.next(user);
+          this.setUserToLocalStorage(user);
           this.router.navigateByUrl('/');
         })
       );
@@ -33,12 +32,12 @@ export class AccountService {
 
     return this.http
       .get<User>(`${environment.apiUrl}/account/current-user`, { headers })
-      .pipe(
-        map((user) => {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUser$.next(user);
-        })
-      );
+      .pipe(map((user) => this.setUserToLocalStorage(user)));
+  }
+
+  private setUserToLocalStorage(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentUser$.next(user);
   }
 
   logout() {
