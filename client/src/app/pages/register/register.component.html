@@ -1,1 +1,42 @@
-<p>register works!</p>
+<section *ngIf="registerForm">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Display Name</mat-label>
+      <input
+        formControlName="displayName"
+        type="test"
+        matInput
+        placeholder="Ex. Meow"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        formControlName="email"
+        type="email"
+        matInput
+        placeholder="Ex. meow@example.com"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        formControlName="password"
+        type="password"
+        matInput
+        placeholder="Can't see your Meow"
+      />
+    </mat-form-field>
+    <br />
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="registerForm.invalid"
+    >
+      Register
+    </button>
+  </form>
+</section>
