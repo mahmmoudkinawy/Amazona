@@ -1,1 +1,32 @@
-<p>login works!</p>
+<section *ngIf="loginForm">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field hintLabel="Enter your Email">
+      <mat-label>Email</mat-label>
+      <input
+        formControlName="email"
+        type="email"
+        matInput
+        placeholder="Ex. meow@example.com"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field hintLabel="Enter your password">
+      <mat-label>Password</mat-label>
+      <input
+        formControlName="password"
+        type="password"
+        matInput
+        placeholder="Can't see your Meow"
+      />
+    </mat-form-field>
+    <br />
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="loginForm.invalid"
+    >
+      Login
+    </button>
+  </form>
+</section>

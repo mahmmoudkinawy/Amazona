@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { Basket } from 'src/app/models/basket';
+import { User } from 'src/app/models/user';
+import { AccountService } from 'src/app/services/account.service';
 import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
@@ -11,13 +13,32 @@ import { BasketService } from 'src/app/services/basket.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private readonly dispose$ = new Subject();
-  basket$: Observable<Basket | null> | null = null;
+  basket$ = this.basketService.basket$;
+  currentUser$ = this.accountService.currentUser$;
 
-  constructor(private basketService: BasketService) {}
+  constructor(
+    private basketService: BasketService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
     this.loadBasket();
-    this.basket$ = this.basketService.basket$;
+    this.loadCurrentUser();
+  }
+
+  logout() {
+    this.accountService.logout();
+  }
+
+  //I know this localStorage for the token! is very dangerous, but will handle it later and make as a cookie
+  private loadCurrentUser() {
+    const user: User = JSON.parse(localStorage.getItem('user') as string);
+    if (user) {
+      this.accountService
+        .loadCurrentUser(user)
+        .pipe(takeUntil(this.dispose$))
+        .subscribe();
+    }
   }
 
   private loadBasket() {
@@ -31,7 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.dispose$.unsubscribe();
+    this.dispose$.next(null);
     this.dispose$.complete();
   }
 }
