@@ -1,8 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
 import { AccountService } from 'src/app/services/account.service';
+
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +20,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   private readonly dispose$ = new Subject();
   loginForm: FormGroup | null = null;
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private toastrService: ToastrService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.initializeLoginForm();
@@ -23,12 +34,18 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.accountService
       .login(this.loginForm?.value)
       .pipe(takeUntil(this.dispose$))
-      .subscribe();
+      .subscribe(
+        () => {},
+        (error) => this.toastrService.error(error.error)
+      );
   }
 
   private initializeLoginForm() {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+    this.loginForm = this.fb.group({
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'),
+      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.pattern(

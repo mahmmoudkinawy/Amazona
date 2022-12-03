@@ -30,7 +30,7 @@
         >shopping_cart
       </mat-icon>
     </a>
-    <ng-container *ngIf="(currentUser$ | async) === undefined">
+    <ng-container *ngIf="(currentUser$ | async) === null">
       <a mat-button routerLink="/login" routerLinkActive="header-item-selected"
         >Login</a
       >

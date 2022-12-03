@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map } from 'rxjs';
+import { ReplaySubject, map, of } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
@@ -12,7 +12,7 @@ import { UserForRegister } from '../models/user-for-register';
   providedIn: 'root',
 })
 export class AccountService {
-  currentUser$ = new BehaviorSubject<User>(undefined!);
+  currentUser$ = new ReplaySubject<User>(1);
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -22,7 +22,7 @@ export class AccountService {
       .pipe(
         map((user) => {
           this.setUserToLocalStorage(user);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/shop');
         })
       );
   }
@@ -33,9 +33,15 @@ export class AccountService {
       .pipe(
         map((user) => {
           this.setUserToLocalStorage(user);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/shop');
         })
       );
+  }
+
+  checkEmailExists(email: string) {
+    return this.http.get<boolean>(
+      `${environment.apiUrl}/account/email-exists?email=` + email
+    );
   }
 
   loadCurrentUser(user: User) {

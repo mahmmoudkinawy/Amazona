@@ -41,10 +41,6 @@ export class ErrorsInterceptor implements HttpInterceptor {
             case 500:
               this.router.navigateByUrl('/server-error');
               break;
-
-            default:
-              this.toastr.error('Something Went Wrong');
-              break;
           }
         }
 
