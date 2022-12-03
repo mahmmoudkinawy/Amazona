@@ -75,7 +75,6 @@ export class BasketService {
   //2 - Must unsubscribed from this method.
   //3 - I did unsubscribed, but not a clean way
   private deleteBasket(basket: Basket) {
-    console.log('deleteBasket:', basket);
     return this.http
       .delete(`${environment.apiUrl}/baskets/${basket.id}`)
       .subscribe(() => {
@@ -103,8 +102,6 @@ export class BasketService {
     const shipping = 0;
     const subtotal = basket.items.reduce((a, b) => b.price * b.quantity + a, 0);
     const total = subtotal + shipping;
-
-    console.log('Total:', total);
 
     this.basketTotal$.next({
       shipping,

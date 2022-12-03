@@ -11,6 +11,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ServerErrorComponent } from './pages/server-error/server-error.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
   { path: 'login', component: LoginComponent, data: { breadcrumb: 'Login' } },
@@ -32,6 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
+    canActivate: [AuthGuard],
     component: CheckoutComponent,
     data: { breadcrumb: 'Checkout' },
   },
