@@ -64,7 +64,7 @@ public static class Seed
 
     public static async Task SeedDeliveryMethods(AmazonaDbContext context)
     {
-        if (!await context.DeliveryMethods.AnyAsync()) return;
+        if (await context.DeliveryMethods.AnyAsync()) return;
 
         var deliveryMethods = new List<DeliveryMethodEntity>
         {

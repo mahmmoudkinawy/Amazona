@@ -13,6 +13,8 @@ public static class ApplicationServicesExtensions
 
         services.AddScoped<ITokenService, TokenService>();
 
+        services.AddScoped<IOrderService, OrderService>();
+
         services.AddSingleton<IConnectionMultiplexer>(_ =>
         {
             var configurations = ConfigurationOptions.Parse(

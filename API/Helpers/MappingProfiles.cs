@@ -12,5 +12,7 @@ public sealed class MappingProfiles : Profile
         CreateMap<BasketItemDto, BasketItemEntity>();
 
         CreateMap<CustomerBasketDto, CustomerBasketEntity>();
+
+        CreateMap<AddressDto, AddressOwned>();
     }
 }
