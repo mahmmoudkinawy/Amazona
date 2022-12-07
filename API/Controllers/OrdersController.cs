@@ -38,13 +38,13 @@ public sealed class OrdersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetOrderForUser(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetOrdersForUser(CancellationToken cancellationToken)
     {
         var email = User.RetrieveEmailFromPrinciple();
 
         var orders = await _orderService.GetOrdersForUserAsync(email, cancellationToken);
 
-        return Ok(orders);
+        return Ok(_mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders));
     }
 
     [HttpGet("{id}")]
