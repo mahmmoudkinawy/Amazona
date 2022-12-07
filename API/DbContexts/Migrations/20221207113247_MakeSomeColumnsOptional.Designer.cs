@@ -3,6 +3,7 @@ using System;
 using API.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.DbContexts.Migrations
 {
     [DbContext(typeof(AmazonaDbContext))]
-    partial class AmazonaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221207113247_MakeSomeColumnsOptional")]
+    partial class MakeSomeColumnsOptional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,7 +127,7 @@ namespace API.DbContexts.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Price")
@@ -475,8 +477,7 @@ namespace API.DbContexts.Migrations
                     b.HasOne("API.Entities.OrderEntity", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.OwnsOne("API.Entities.ProductItemOrderedOwned", "ItemOrdered", b1 =>
                         {

@@ -5,5 +5,4 @@ public sealed class CustomerBasketEntity
     public List<BasketItemEntity> Items { get; set; } = new();
 
     public CustomerBasketEntity(string id) => Id = id;
-
 }

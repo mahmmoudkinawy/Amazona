@@ -41,4 +41,24 @@ public sealed class Repository<T> : IRepository<T> where T : BaseEntity
     {
         return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
     }
+
+    public async Task Add(T entity, CancellationToken cancellationToken)
+    {
+        _context.Set<T>().Add(entity);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task Remove(T entity, CancellationToken cancellationToken)
+    {
+        _context.Set<T>().Remove(entity);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task Update(T entity, CancellationToken cancellationToken)
+    {
+        _context.Set<T>().Attach(entity);
+        _context.Entry(entity).State = EntityState.Modified;
+
+        await _context.SaveChangesAsync(cancellationToken);
+    }
 }

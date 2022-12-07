@@ -59,8 +59,9 @@ public sealed class OrderService : IOrderService
             Subtotal = subtotal
         };
 
-        //Save to db
-        //_orderRepository.
+        await _orderRepository.Add(order, cancellationToken);
+
+        await _basketRepository.DeleteBasketAsync(basketId);
 
         return order;
     }
@@ -74,11 +75,16 @@ public sealed class OrderService : IOrderService
     public async Task<OrderEntity> GetOrderByIdAsync(
         int id, string buyerEmail, CancellationToken cancellationToken)
     {
-        return await _orderRepository.GetByIdAsync(id, cancellationToken);
+        var spec = new OrderWithItemsAndOrderingSpecification(id, buyerEmail);
+
+        return await _orderRepository.GetEntityWithSpecAsync(spec, cancellationToken);
     }
 
-    public Task<IReadOnlyList<OrderEntity>> GetOrdersForUserAsync(string buyerEmail, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<OrderEntity>> GetOrdersForUserAsync(
+        string buyerEmail, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var spec = new OrderWithItemsAndOrderingSpecification(buyerEmail);
+
+        return await _orderRepository.GetEntitiesWithSpecAsync(spec, cancellationToken);
     }
 }

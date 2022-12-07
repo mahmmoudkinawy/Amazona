@@ -36,4 +36,36 @@ public sealed class OrdersController : ControllerBase
 
         return Ok(order);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetOrderForUser(CancellationToken cancellationToken)
+    {
+        var email = User.RetrieveEmailFromPrinciple();
+
+        var orders = await _orderService.GetOrdersForUserAsync(email, cancellationToken);
+
+        return Ok(orders);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetOrderForUserById(
+        [FromRoute] int id, CancellationToken cancellationToken)
+    {
+        var email = User.RetrieveEmailFromPrinciple();
+
+        var order = await _orderService.GetOrderByIdAsync(id, email, cancellationToken);
+
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(order);
+    }
+
+    [HttpGet("delivery-methods")]
+    public async Task<IActionResult> GetDeliveryMethods(CancellationToken cancellationToken)
+    {
+        return Ok(await _orderService.GetDeliveryMethodsAsync(cancellationToken));
+    }
 }
