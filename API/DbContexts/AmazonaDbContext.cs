@@ -9,6 +9,9 @@ public sealed class AmazonaDbContext : IdentityDbContext<UserEntity, IdentityRol
     public DbSet<ProductEntity> Products { get; set; }
     public DbSet<ProductTypeEntity> ProductTypes { get; set; }
     public DbSet<ProductBrandEntity> ProductBrands { get; set; }
+    public DbSet<OrderEntity> Orders { get; set; }
+    public DbSet<DeliveryMethodEntity> DeliveryMethods { get; set; }
+    public DbSet<OrderItemEntity> OrderItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

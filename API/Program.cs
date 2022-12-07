@@ -33,6 +33,7 @@ try
     await dbContext.Database.MigrateAsync();
     await Seed.SeedData(dbContext);
     await Seed.SeedUsers(userManager);
+    await Seed.SeedDeliveryMethods(dbContext);
 }
 catch (Exception ex)
 {

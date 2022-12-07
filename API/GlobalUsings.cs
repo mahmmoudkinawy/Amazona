@@ -1,6 +1,7 @@
 ﻿global using API.DbContexts;
 global using API.DTOs;
 global using API.Entities;
+global using API.Enums;
 global using API.Extensions;
 global using API.Helpers;
 global using API.Interfaces;
@@ -25,6 +26,7 @@ global using System.ComponentModel.DataAnnotations.Schema;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Linq.Expressions;
 global using System.Reflection;
+global using System.Runtime.Serialization;
 global using System.Security.Claims;
 global using System.Text;
 global using System.Text.Json;
