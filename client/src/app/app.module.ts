@@ -19,6 +19,12 @@ import { PagingHeaderContentComponent } from './components/paging-header-content
 import { PagerComponent } from './components/pager/pager.component';
 import { SectionHeaderComponent } from './components/section-header/section-header.component';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { CheckoutAddressComponent } from './components/checkout-address/checkout-address.component';
+import { CheckoutDeliveryComponent } from './components/checkout-delivery/checkout-delivery.component';
+import { CheckoutReviewComponent } from './components/checkout-review/checkout-review.component';
+import { CheckoutPaymentComponent } from './components/checkout-payment/checkout-payment.component';
+import { CheckoutSuccessComponent } from './components/checkout-success/checkout-success.component';
 
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -51,6 +57,12 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     BasketComponent,
     CheckoutComponent,
     OrderTotalsComponent,
+    StepperComponent,
+    CheckoutAddressComponent,
+    CheckoutDeliveryComponent,
+    CheckoutReviewComponent,
+    CheckoutPaymentComponent,
+    CheckoutSuccessComponent,
   ],
   imports: [
     BrowserModule,

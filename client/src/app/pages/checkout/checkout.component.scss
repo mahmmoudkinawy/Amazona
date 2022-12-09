@@ -1,0 +1,18 @@
+section {
+  mat-list-item {
+    cursor: pointer;
+  }
+
+  display: flex;
+
+  .left-sidenav {
+    width: 60%;
+    padding: 2em;
+    min-height: 500px;
+  }
+
+  .right-sidenav {
+    padding: 30px;
+    width: 40%;
+  }
+}

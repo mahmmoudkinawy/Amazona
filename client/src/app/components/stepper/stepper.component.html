@@ -1,0 +1,27 @@
+<mat-horizontal-stepper [linear]="false" #stepper>
+
+    <mat-step label="Address" state="address">
+        <app-checkout-address></app-checkout-address>
+    </mat-step>
+
+    <mat-step label="Delivery" state="delivery">
+        <app-checkout-delivery></app-checkout-delivery>
+    </mat-step>
+
+    <mat-step label="Review" state="review">
+        <app-checkout-review></app-checkout-review>
+    </mat-step>
+
+    <mat-step label="Payment" state="payment">
+        <app-checkout-payment></app-checkout-payment>
+    </mat-step>
+
+</mat-horizontal-stepper>
+
+<!-- You are now done.
+        <div>
+                        <button mat-button matStepperNext>Continue</button>
+
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div> -->

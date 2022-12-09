@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatStepperModule } from '@angular/material/stepper';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 const MaterialComponents = [
   MatCardModule,
@@ -24,6 +26,8 @@ const MaterialComponents = [
   MatRadioModule,
   MatPaginatorModule,
   MatTableModule,
+  MatStepperModule,
+  CdkStepperModule,
 ];
 
 @NgModule({
