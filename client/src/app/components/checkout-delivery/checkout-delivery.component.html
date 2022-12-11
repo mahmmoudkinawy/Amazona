@@ -3,16 +3,18 @@
   class="radio-group"
   *ngIf="deliveryMethodForm"
 >
-  <form [formGroup]="deliveryMethodForm">
-    <mat-radio-button
-      class="radio-button"
-      *ngFor="let dm of deliveryMethods"
-      [value]="dm.id"
-      formControlName="deliveryMethodId"
-    >
-      {{ dm.shortName }} - {{ dm.price | currency }}
-      <br />
-      {{ dm.description }}
-    </mat-radio-button>
-  </form>
+  <mat-radio-button
+    class="radio-button"
+    *ngFor="let dm of deliveryMethods"
+    [value]="dm.id"
+    (click)="setShippingPrice(dm)"
+  >
+    {{ dm.shortName }} - {{ dm.price | currency }}
+    <br />
+    {{ dm.description }}
+  </mat-radio-button>
+
+  <br />
 </mat-radio-group>
+<button mat-raised-button color="primary" matStepperNext>Next</button>
+<button mat-button matStepperPrevious>Back</button>

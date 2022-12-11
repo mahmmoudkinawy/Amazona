@@ -24,7 +24,8 @@ import { CheckoutAddressComponent } from './components/checkout-address/checkout
 import { CheckoutDeliveryComponent } from './components/checkout-delivery/checkout-delivery.component';
 import { CheckoutReviewComponent } from './components/checkout-review/checkout-review.component';
 import { CheckoutPaymentComponent } from './components/checkout-payment/checkout-payment.component';
-import { CheckoutSuccessComponent } from './components/checkout-success/checkout-success.component';
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
+import { CheckoutSuccessComponent } from './pages/checkout-success/checkout-success.component';
 
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -39,7 +40,6 @@ import { ServerErrorComponent } from './pages/server-error/server-error.componen
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
-import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 
 @NgModule({
   declarations: [

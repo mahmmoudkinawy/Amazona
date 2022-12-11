@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReplaySubject, map, of } from 'rxjs';
+import { ReplaySubject, map } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+import { Address } from '../models/address';
 import { User } from '../models/user';
 import { UserForLogin } from '../models/user-for-login';
 import { UserForRegister } from '../models/user-for-register';
@@ -51,6 +52,17 @@ export class AccountService {
     return this.http
       .get<User>(`${environment.apiUrl}/account/current-user`, { headers })
       .pipe(map((user) => this.setUserToLocalStorage(user)));
+  }
+
+  loadUserAddress() {
+    return this.http.get<Address>(`${environment.apiUrl}/account/address`);
+  }
+
+  updateUserAddress(address: Address) {
+    return this.http.post<Address>(
+      `${environment.apiUrl}/account/address`,
+      address
+    );
   }
 
   logout() {

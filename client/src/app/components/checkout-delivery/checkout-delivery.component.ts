@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
 import { DeliveryMethod } from 'src/app/models/deliveryMethod';
+import { BasketService } from 'src/app/services/basket.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 
 @Component({
@@ -17,12 +18,17 @@ export class CheckoutDeliveryComponent implements OnInit, OnDestroy {
 
   constructor(
     private checkoutService: CheckoutService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private basketService: BasketService
   ) {}
 
   ngOnInit(): void {
     this.loadDeliveryMethods();
     this.createDeliveryMethod();
+  }
+
+  setShippingPrice(deliveryMethod: DeliveryMethod) {
+    this.basketService.setShippingPrice(deliveryMethod);
   }
 
   private createDeliveryMethod() {

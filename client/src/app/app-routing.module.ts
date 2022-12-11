@@ -10,6 +10,7 @@ import { BasketComponent } from './pages/basket/basket.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ServerErrorComponent } from './pages/server-error/server-error.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { CheckoutSuccessComponent } from './pages/checkout-success/checkout-success.component';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -37,6 +38,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: CheckoutComponent,
     data: { breadcrumb: 'Checkout' },
+  },
+  {
+    path: 'checkout-success',
+    canActivate: [AuthGuard],
+    component: CheckoutSuccessComponent,
+    data: { breadcrumb: 'Checkout Success' },
   },
   {
     path: 'server-error',

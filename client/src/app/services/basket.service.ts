@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Basket, Cart } from '../models/basket';
 import { BasketItem } from '../models/basketItem';
 import { BasketTotals } from '../models/basketTotals';
+import { DeliveryMethod } from '../models/deliveryMethod';
 import { Product } from '../models/product';
 
 @Injectable({
@@ -14,8 +15,14 @@ import { Product } from '../models/product';
 export class BasketService {
   basket$ = new BehaviorSubject<Basket>(null!);
   basketTotal$ = new BehaviorSubject<BasketTotals | null>(null);
+  shipping = 0;
 
   constructor(private http: HttpClient) {}
+
+  setShippingPrice(deliveryMethod: DeliveryMethod) {
+    this.shipping = deliveryMethod.price;
+    this.calculateTotals();
+  }
 
   loadBasket(id: string) {
     return this.http.get<Basket>(`${environment.apiUrl}/baskets/${id}`).pipe(
@@ -70,6 +77,12 @@ export class BasketService {
     }
   }
 
+  deleteLocalBasket(id: string) {
+    this.basket$.next(null!);
+    this.basketTotal$.next(null);
+    localStorage.removeItem('basket_id');
+  }
+
   //Maybe will be refactored later, because a lot of things.
   //1 - broke up Single Responsibility pci principle.
   //2 - Must unsubscribed from this method.
@@ -99,7 +112,7 @@ export class BasketService {
 
   private calculateTotals() {
     const basket = this.basket$.value;
-    const shipping = 0;
+    const shipping = this.shipping;
     const subtotal = basket.items.reduce((a, b) => b.price * b.quantity + a, 0);
     const total = subtotal + shipping;
 
