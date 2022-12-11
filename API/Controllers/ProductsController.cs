@@ -21,6 +21,7 @@ public sealed class ProductsController : ControllerBase
         _mapper = mapper;
     }
 
+    [Cached(600)]
     [HttpGet]
     public async Task<IActionResult> GetProducts(
         [FromQuery] ProductSpecParams productParams, 
@@ -48,6 +49,7 @@ public sealed class ProductsController : ControllerBase
             );
     }
 
+    [Cached(600)]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProduct(
         [FromRoute] int id,
@@ -65,12 +67,14 @@ public sealed class ProductsController : ControllerBase
         return Ok(_mapper.Map<ProductToReturnDto>(product));
     }
 
+    [Cached(600)]
     [HttpGet("brands")]
     public async Task<IActionResult> GetProductBrands(CancellationToken cancellationToken)
     {
         return Ok(await _productBrandsRepository.GetAllAsync(cancellationToken));
     }
 
+    [Cached(600)]
     [HttpGet("types")]
     public async Task<IActionResult> GetProductTypes(CancellationToken cancellationToken)
     {

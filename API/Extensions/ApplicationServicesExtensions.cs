@@ -15,6 +15,8 @@ public static class ApplicationServicesExtensions
 
         services.AddScoped<IOrderService, OrderService>();
 
+        services.AddSingleton<IResponseCacheService, ResponseCacheService>();
+
         services.AddSingleton<IConnectionMultiplexer>(_ =>
         {
             var configurations = ConfigurationOptions.Parse(
