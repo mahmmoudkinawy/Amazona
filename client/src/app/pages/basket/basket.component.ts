@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { Basket } from 'src/app/models/basket';
@@ -10,7 +10,7 @@ import { BasketService } from 'src/app/services/basket.service';
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.scss'],
 })
-export class BasketComponent implements OnInit {
+export class BasketComponent implements OnInit, OnDestroy {
   private readonly dispose$ = new Subject();
   basket$: Observable<Basket | null> | null = null;
   dataSource: BasketItem[] | undefined = [];
@@ -39,5 +39,10 @@ export class BasketComponent implements OnInit {
     this.basketService.basket$
       .pipe(takeUntil(this.dispose$))
       .subscribe((basket) => (this.dataSource = basket.items));
+  }
+
+  ngOnDestroy(): void {
+    this.dispose$.complete();
+    this.dispose$.next(null);
   }
 }

@@ -38,6 +38,8 @@ import { ServerErrorComponent } from './pages/server-error/server-error.componen
 
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     CheckoutReviewComponent,
     CheckoutPaymentComponent,
     CheckoutSuccessComponent,
+    BasketSummaryComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,11 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
       multi: true,
     },
   ],
