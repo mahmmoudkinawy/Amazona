@@ -17,6 +17,7 @@
       >Shop</a
     >
     <a
+      *ngIf="currentUser$ | async"
       mat-button
       routerLinkActive="header-item-selected"
       routerLink="/dashboard"
