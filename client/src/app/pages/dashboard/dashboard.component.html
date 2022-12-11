@@ -1,0 +1,14 @@
+<section>
+  <mat-list role="list" class="left-sidenav">
+    <mat-list-item
+      routerLink="/dashboard/orders"
+      routerLinkActive="header-item-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Orders
+    </mat-list-item>
+  </mat-list>
+
+  <div class="right-sidenav">
+    <router-outlet></router-outlet>
+  </div>
+</section>

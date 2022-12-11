@@ -16,7 +16,12 @@
     <a mat-button routerLink="/shop" routerLinkActive="header-item-selected"
       >Shop</a
     >
-    <a mat-button routerLinkActive="header-item-selected">Dashboard</a>
+    <a
+      mat-button
+      routerLinkActive="header-item-selected"
+      routerLink="/dashboard"
+      >Dashboard</a
+    >
   </div>
 
   <div>
@@ -46,6 +51,5 @@
       <div>Welcome {{ user.displayName | titlecase }}</div>
       <button mat-raised-button (click)="logout()">Logout</button>
     </div>
-    
   </div>
 </mat-toolbar>

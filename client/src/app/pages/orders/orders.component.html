@@ -1,0 +1,39 @@
+<div *ngIf="dataSource.length === 0" class="no-products">
+    <h1>There is no products in your history!</h1>
+</div>
+
+<table mat-table *ngIf="dataSource" [dataSource]="dataSource">
+    <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef>Buyer Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.buyerEmail }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryMethod">
+        <th mat-header-cell *matHeaderCellDef>Delivery Method</th>
+        <td mat-cell *matCellDef="let element">{{ element.deliveryMethod }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="subtotal">
+        <th mat-header-cell *matHeaderCellDef>Total</th>
+        <td mat-cell *matCellDef="let element">
+            {{element.total | currency}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">
+            {{ element.status }}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orderDate">
+        <th mat-header-cell *matHeaderCellDef>Order Date</th>
+        <td mat-cell *matCellDef="let element">
+            {{ element.orderDate | date}}
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

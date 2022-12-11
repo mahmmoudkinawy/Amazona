@@ -11,8 +11,10 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ServerErrorComponent } from './pages/server-error/server-error.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CheckoutSuccessComponent } from './pages/checkout-success/checkout-success.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
@@ -32,6 +34,19 @@ const routes: Routes = [
     path: 'basket',
     component: BasketComponent,
     data: { breadcrumb: 'Basket' },
+  },
+  {
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    component: DashboardComponent,
+    children: [
+      {
+        path: 'orders',
+        component: OrdersComponent,
+        data: { breadcrumb: 'Orders' },
+      },
+    ],
+    data: { breadcrumb: 'Dashboard' },
   },
   {
     path: 'checkout',
