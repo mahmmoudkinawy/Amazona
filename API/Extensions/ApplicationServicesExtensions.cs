@@ -9,9 +9,11 @@ public static class ApplicationServicesExtensions
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
+        services.AddScoped<IPaymentService, PaymentService>();
+
         services.AddScoped<IBasketRepository, BasketRepository>();
 
-        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<ITokenService, Services.TokenService>();
 
         services.AddScoped<IOrderService, OrderService>();
 
