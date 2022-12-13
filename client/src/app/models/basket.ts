@@ -5,6 +5,9 @@ import { BasketItem } from './basketItem';
 export interface Basket {
   id: string;
   items: BasketItem[];
+  clientSecret?: string;
+  paymentIntentId?: string;
+  deliveryMethodId?: number;
 }
 
 export class Cart implements Basket {

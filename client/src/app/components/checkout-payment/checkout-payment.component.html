@@ -1,8 +1,32 @@
-<button
-  mat-raised-button
-  color="primary"
-  (click)="submitOrder()"
->
-  Next
-</button>
-<button mat-button matStepperPrevious>Back</button>
+<section *ngIf="paymentForm">
+  <form [formGroup]="paymentForm">
+    <mat-form-field>
+      <mat-label>Name on Card</mat-label>
+      <input formControlName="nameOnCard" type="text" matInput />
+      <mat-error *ngIf="
+      paymentForm.get('nameOnCard')!.invalid && paymentForm.get('nameOnCard')!.touched &&
+      paymentForm.get('nameOnCard')!.errors?.['required']
+    ">Email is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div>
+      <div #cardNumber></div>
+    </div>
+
+    <div>
+      <div #cardExpiry></div>
+    </div>
+
+    <div>
+      <div #cardCvc></div>
+    </div>
+
+    <br>
+
+    <button mat-raised-button color="primary" (click)="submitOrder()">
+      Next
+    </button>
+    <button mat-button matStepperPrevious>Back</button>
+  </form>
+</section>
