@@ -33,7 +33,6 @@ public static class ApplicationServicesExtensions
         services.AddDbContext<AmazonaDbContext>(
             _ => _.UseNpgsql(config.GetConnectionString("DefaultConnection")));
 
-
         return services;
     }
 }

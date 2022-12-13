@@ -17,6 +17,8 @@ app.UseSwaggerDocumentation();
 
 //app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseCors(Constants.CorsPolicyName);
 
 app.UseAuthentication();
@@ -24,6 +26,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapFallbackToController("Index", "Fallback");
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 using var scope = app.Services.CreateScope();
